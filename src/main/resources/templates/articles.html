@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Title</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css"
+                          th:href="@{css/bootstrap.min.css}">
+                                    <!--thymeleaf a besoin de celui-ci -->
+</head>
+<body>
+<div layout:fragment="content">
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Liste des articles</div>
+    <div class="panel-body">
+      <form th:action="@{/index}" method="get"> <!-- validation du formulaire -> appel de la methode index -->
+        <label>keyword</label>
+        <input type="text" name="keyword" th:value="${keyword}">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+      <table class="table">
+        <tr>
+          <th>Id</th><th>Description</th><th>Brand</th><th>Price</th>
+        </tr>
+        <tr th:each="a:${listArticle}">
+          <td th:text="${a.id}"></td>
+          <td th:text="${a.description}"></td>
+          <td th:text="${a.brand}"></td>
+          <td th:text="${a.price}"></td>
+          <td>
+            <a th:href="@{/delete(id=${a.id},page=${currentPage} , keyword=${keyword})}">Delete</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+  <ul class="nav nav-pills"> <!-- alignement de la liste -->
+    <li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+      <!-- 4 activer cette balise si condition v --> <!-- 1 pour chaque indice de notre tableau "de pages"-->
+      <a th:href="@{index(page=${status.index},keyword=${keyword})}" th:text="${status.index}"></a>
+      <!-- 3 lien vers un indice/"page"   2 afficher l'indice du tableau -->
+    </li>
+  </ul>
+</div>
+
+
+</body>
+</html>
