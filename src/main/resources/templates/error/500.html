@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout">
+<head>
+<meta charset="utf-8">
+<title>erreur serveur</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<img alt="Vous n'avez pas les droits d'accès" src="../static/images/500.jpg" th:src="@{images/500.jpg}">
+	</div>
+</body>
+
+</html>

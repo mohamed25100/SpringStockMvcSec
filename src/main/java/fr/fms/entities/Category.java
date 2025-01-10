@@ -1,10 +1,19 @@
 package fr.fms.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = "articles")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -14,44 +23,4 @@ public class Category implements Serializable {
 
     @OneToMany(mappedBy = "category")
     private Collection<Article> articles;
-
-    public Category() {
-    }
-
-    public Category(String name) {
-        this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Collection<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(Collection<Article> articles) {
-        this.articles = articles;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", articles=" + articles +
-                '}';
-    }
 }
